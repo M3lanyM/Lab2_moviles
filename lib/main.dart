@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 void main() => runApp(const MyApp());
 
@@ -97,38 +98,45 @@ class _SismosScreenState extends State<SismosScreen> {
         ),
         body: TabBarView(
           children: [
-            Column(
+            Stack(
               children: [
-                ToggleButtons(
-                  children: const [
-                    Text('24 Horas'),
-                    Text('15 Días'),
-                  ],
-                  isSelected: _selections,
-                  onPressed: (int index) {
-                    setState(() {
-                      for (int buttonIndex = 0;
-                          buttonIndex < _selections.length;
-                          buttonIndex++) {
-                        if (buttonIndex == index) {
-                          _selections[buttonIndex] = true;
-                        } else {
-                          _selections[buttonIndex] = false;
-                        }
-                      }
-                    });
-                  },
-                ),
-                Expanded(
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/mapa.png"),
-                        fit: BoxFit.cover,
-                      ),
+                Container(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/mapa.png"),
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
+                Positioned(
+                    right: 0,
+                    left: 0,
+                    bottom: 20,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ToggleButtons(
+                          children: const [
+                            Text('24 Horas'),
+                            Text('15 Días'),
+                          ],
+                          isSelected: _selections,
+                          onPressed: (int index) {
+                            setState(() {
+                              for (int buttonIndex = 0;
+                                  buttonIndex < _selections.length;
+                                  buttonIndex++) {
+                                if (buttonIndex == index) {
+                                  _selections[buttonIndex] = true;
+                                } else {
+                                  _selections[buttonIndex] = false;
+                                }
+                              }
+                            });
+                          },
+                        ),
+                      ],
+                    )),
               ],
             ),
             const Center(
